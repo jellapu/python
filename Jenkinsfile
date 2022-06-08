@@ -11,7 +11,7 @@ pipeline{
                 sh "pip install"
             }
         }
-        stage('install the dependencies'){
+        stage('install the dependencies1'){
             steps{
                 sh "pip install flake8"
             }
