@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage(SCM){
             steps{
-                git branch: 'main', url: 'https://github.com/jellapu/python.git'
+                git branch: 'master', url: 'https://github.com/jellapu/python.git'
             }
         }
         stage('install the dependencies'){
