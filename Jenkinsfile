@@ -6,24 +6,21 @@ pipeline{
                 git branch: 'master', url: 'https://github.com/jellapu/python.git'
             }
         }
-        stage('install the dependencies'){
+        stage('build'){
             steps{
-                sh "pip install"
-            }
-        }
-        stage('install the dependencies1'){
-            steps{
-                sh "pip install flake8"
+                sh "pip install -r requirements.txt"
             }
         }
         stage('test'){
             steps{
-                sh "pytest"
+                sh "pip install pytest pytest-azurepipelines"
+                sh "pip install pytest-cov"
+                sh "pytest --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml"
             }
         }
-        stage('run test with flake'){
+        stage('publish reporting'){
             steps{
-                sh "flake8 . "
+                junit testResults: '**/test-*.xml'
             }
         }
     }
